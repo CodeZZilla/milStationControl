@@ -35,5 +35,14 @@ public class CreateController {
         return "createForm";
     }
 
+    @PostMapping("/save-create")
+    public String createSave(@ModelAttribute("thing") Thing thing,
+                             @AuthenticationPrincipal User user) {
+
+        thing.setUnit(user.getUnit());
+        thingService.save(thing);
+
+        return "redirect:/";
+    }
 
 }

@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity(name = "unit")
 @Data
@@ -17,13 +18,18 @@ public class Unit {
 
     private String nameUnit;
 
-    @OneToOne(optional = false, cascade = CascadeType.ALL)
-    private Unit command;
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private Command command;
+//    @OneToMany(mappedBy="command")
+//    private Set<Unit> units;
+
+//    @OneToOne(optional = false, cascade = CascadeType.ALL)
+//    private Unit command;
 
     @OneToMany(mappedBy = "unit", fetch = FetchType.EAGER)
     private List<Thing> thingList;
 
-    @OneToMany(mappedBy="unit")
+    @OneToMany(mappedBy="unit", cascade = CascadeType.ALL,  fetch = FetchType.EAGER)
     private List<User> users;
 
     @Override

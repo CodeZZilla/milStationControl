@@ -1,28 +1,29 @@
 package com.example.control.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
-@Entity(name = "type")
+@Entity(name = "command")
 @Data
 @NoArgsConstructor
-public class Type {
+@AllArgsConstructor
+public class Command {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String type;
-    private Boolean isCompletType;
+    private String command;
 
-    @OneToMany(mappedBy = "type", cascade = CascadeType.ALL)
-    private List<Thing> thingList;
+    @OneToMany(mappedBy = "command", cascade = CascadeType.ALL)
+    private Set<Unit> units;
 
     @Override
     public String toString() {
-        return type;
+        return command;
     }
 }

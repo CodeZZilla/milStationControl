@@ -1,14 +1,12 @@
 package com.example.control.controllers;
 
-import com.example.control.models.Properties;
-import com.example.control.models.State;
-import com.example.control.models.Thing;
-import com.example.control.models.Type;
+import com.example.control.models.*;
 import com.example.control.services.PropertiesService;
 import com.example.control.services.StateService;
 import com.example.control.services.ThingService;
 import com.example.control.services.TypeService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,42 +29,16 @@ public class IndexController {
 
 
     @GetMapping("/")
-    public String getIndex(Model model) {
-        model.addAttribute("things", thingService.findAll());
+    public String getIndex(@AuthenticationPrincipal User user, Model model) {
+        model.addAttribute("userPrincipal", user);
+        model.addAttribute("things", thingService.findAllByIdUnit(user.getUnit().getId()));
         return "index";
     }
 
-
-
-//    @PostMapping("/save")
-//    public String saveThings(@ModelAttribute("thing") Thing thing,
-//                             @ModelAttribute("properties") Properties properties, Model model) {
-//
-//        model.addAttribute("thing", thing);
-//        model.addAttribute("properties", properties);
-//
-//        properties.setThing(thing);
-//        thing.setProperties(properties);
-//        propertiesService.save(properties);
-//        thingService.save(thing);
-//        return "index";
-//    }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable(name = "id") Long id) {
         thingService.deleteById(id);
         return "redirect:/";
     }
-
-    @PostMapping("/save")
-    public String createSave(@ModelAttribute("thing") Thing thing) {
-
-        thingService.save(thing);
-
-        return "redirect:/";
-    }
-
-
-
-
 }

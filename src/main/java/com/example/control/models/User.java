@@ -24,7 +24,7 @@ public class User implements UserDetails {
     private String password;
     private String roles;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name="unit_id", nullable=false)
     private Unit unit;
 

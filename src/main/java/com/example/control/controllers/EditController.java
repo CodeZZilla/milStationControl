@@ -1,13 +1,17 @@
 package com.example.control.controllers;
 
 import com.example.control.models.Thing;
+import com.example.control.models.User;
 import com.example.control.services.StateService;
 import com.example.control.services.ThingService;
 import com.example.control.services.TypeService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -27,5 +31,15 @@ public class EditController {
         mav.addObject("types", typeService.findAll());
 //        mav.addObject("properties",thing.getProperties());
         return mav;
+    }
+
+    @PostMapping("/save-edit")
+    public String editSave(@ModelAttribute("thing") Thing thing,
+                           @AuthenticationPrincipal User user) {
+
+        thing.setUnit(user.getUnit());
+        thingService.save(thing);
+
+        return "redirect:/";
     }
 }

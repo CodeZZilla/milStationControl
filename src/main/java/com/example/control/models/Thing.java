@@ -22,10 +22,10 @@ public class Thing {
     private Double price;
     private Integer category;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Type type;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private State state;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)

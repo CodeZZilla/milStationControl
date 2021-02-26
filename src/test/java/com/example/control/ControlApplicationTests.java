@@ -9,7 +9,10 @@ class ControlApplicationTests {
 
     @Test
     void contextLoads() {
+        System.out.println("taras");
         System.out.println(new BCryptPasswordEncoder().encode("taras"));
+        System.out.println("dima");
+        System.out.println(new BCryptPasswordEncoder().encode("dima"));
     }
 
 }

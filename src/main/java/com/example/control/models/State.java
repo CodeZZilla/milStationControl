@@ -17,7 +17,7 @@ public class State {
 
     private String state;
 
-    @OneToMany(mappedBy = "state", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "state", cascade = CascadeType.ALL)
     private List<Thing> thingList;
 
     @Override

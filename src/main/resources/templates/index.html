@@ -14,6 +14,13 @@
         <img src="image/broadcast.png" width="30" height="30" class="d-inline-block align-top ml-4 mr-2" alt="">
         Mil. Station Control
     </a>
+    <div>
+        <a th:text="${userPrincipal.name}">User</a>
+        <br>
+        <a th:text="${userPrincipal.unit.nameUnit}">Unit</a>
+        <br>
+        <a th:text="${userPrincipal.unit.command}">Unit</a>
+    </div>
     <div class="float-right">
         <a class="buttonHref mr-3" href="/generate">Generate document</a>
         <a class="buttonHref mr-3" href="/logout">Sign out</a>
@@ -24,10 +31,10 @@
 </nav>
 <div class="" id="table">
     <div id="tablehead">
-        <p id="radiouhave">
-            Radiostation you have
-        </p>
-        <a class="buttonHref" id="newradio" href="/create">Create new radiostation</a>
+<!--        <p id="radiouhave">-->
+<!--            Radiostation you have-->
+<!--        </p>-->
+        <a class="buttonHref" id="newradio" href="/create">Створити</a>
     </div>
     <table class="table table-bordered table-hover ">
         <thead>
@@ -49,12 +56,31 @@
             <td th:text="${thing.state.state}" class="tdtext">State</td>
             <td th:text="${thing.category}" class="tdtext">Category</td>
             <td th:text="${thing.type.type}" class="tdtext">Thing type</td>
-            <td th:text="${thing.properties}" class="tdtext">isCompletType</td>
+            <td class="tdtext">
+                <table class="table table-bordered table-hover ">
+                    <tr>
+                        <td>Інформація</td>
+                        <td th:text="${thing.properties.info}"></td>
+                    </tr>
+                    <tr>
+                        <td>Вага</td>
+                        <td th:text="${thing.properties.weight}"></td>
+                    </tr>
+                    <tr>
+                        <td>Довжина</td>
+                        <td th:text="${thing.properties.length}"></td>
+                    </tr>
+                    <tr>
+                        <td>Частота</td>
+                        <td th:text="${thing.properties.frequency}"></td>
+                    </tr>
+                </table>
+            </td>
             <!--             <td th:text="${thing.unit}" class="tdtext">isCompletType</td> -->
             <td class="tdthird">
                 <div class="tableaction">
-                    <a class="buttonHref editBut" th:href="@{'/edit/' + ${thing.id}}">Edit</a>
-                    <a class="buttonHref delBut" th:href="@{'/delete/' + ${thing.id}}">Delete</a>
+                    <a class="buttonHref editBut" th:href="@{'/edit/' + ${thing.id}}">Редагувати</a>
+                    <a class="buttonHref delBut" th:href="@{'/delete/' + ${thing.id}}">Видалити</a>
                 </div>
             </td>
         </tr>
