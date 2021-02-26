@@ -1,0 +1,22 @@
+
+
+input[type=checkbox]:checked~.button {
+    pointer-events: auto;
+    cursor: pointer;
+    opacity: 100;
+}
+.button {
+    pointer-events: none;
+    opacity: 0;
+}
+.buttonAddProp {
+    pointer-events: auto;
+    cursor: pointer;
+}
+.formCreate{
+    display: flex;
+    justify-content: center;
+}
+#tableRight{
+    margin-left: 50px;
+}
