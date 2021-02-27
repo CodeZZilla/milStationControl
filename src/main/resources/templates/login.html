@@ -20,24 +20,24 @@
   <form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto;">
 
     <div th:if="${param.error}">
-      <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+      <p class="text-danger">Невірні данні для авторизації</p>
     </div>
 
     <div th:if="${param.logout}">
-      <p class="text-warning">You have been logged out.</p>
+      <p class="text-warning">Ви успішно вийшли з аккаунту</p>
     </div>
 
     <div class="border border-secondary p-3 rounded">
-      <p>Access to Mil Station Control</p>
+      <p>Введіть імя та пароль</p>
       <p>
-        <input type="text" name="username" class="form-control" placeholder="Username" required autofocus/>
+        <input type="text" name="username" class="form-control" placeholder="Імя" required autofocus/>
       </p>
       <p>
-        <input type="password" name="password" class="form-control" placeholder="Password" required />
+        <input type="password" name="password" class="form-control" placeholder="Пароль" required />
       </p>
 
       <p>
-        <input type="submit" value="Login" class="btn btn-primary" />
+        <input type="submit" value="Увійти" class="btn btn-primary" />
       </p>
     </div>
   </form>

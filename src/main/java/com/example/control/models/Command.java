@@ -5,7 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "command")
 @Data
@@ -19,8 +20,11 @@ public class Command {
 
     private String command;
 
-    @OneToMany(mappedBy = "command", cascade = CascadeType.ALL)
-    private Set<Unit> units;
+//    @OneToMany(mappedBy = "command", cascade = CascadeType.ALL)
+//    private Set<Unit> units;
+
+    @OneToMany(mappedBy = "command", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Unit> units = new ArrayList<>();
 
     @Override
     public String toString() {

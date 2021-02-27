@@ -18,18 +18,16 @@ public class Unit {
 
     private String nameUnit;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private Command command;
-//    @OneToMany(mappedBy="command")
-//    private Set<Unit> units;
+//    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    private Command command;
 
-//    @OneToOne(optional = false, cascade = CascadeType.ALL)
-//    private Unit command;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Command command;
 
     @OneToMany(mappedBy = "unit", fetch = FetchType.EAGER)
     private List<Thing> thingList;
 
-    @OneToMany(mappedBy="unit", cascade = CascadeType.ALL,  fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="unit", cascade = CascadeType.ALL)
     private List<User> users;
 
     @Override

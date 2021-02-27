@@ -1,6 +1,7 @@
 package com.example.control.services;
 
 
+import com.example.control.models.Properties;
 import com.example.control.models.Thing;
 import com.example.control.repositories.ThingRepo;
 import org.springframework.stereotype.Service;
@@ -35,5 +36,19 @@ public class ThingService {
 
     public List<Thing> findAllByIdUnit(Long id) {
         return thingRepo.findAll().stream().filter(x -> x.getUnit().getId().equals(id)).collect(Collectors.toList());
+    }
+
+    public Thing createThing(){
+        return new Thing();
+    }
+
+    public void addThing(Thing thing) {
+        var thingTemp = new Thing();
+        thingTemp.setProperties(new Properties());
+        thing.getThings().add(thingTemp);
+    }
+
+    public void removeThing(Thing thing, Long id) {
+        thing.getThings().remove(id.intValue());
     }
 }

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="editCreate.css">
+</head>
+<body>
+<form action="#" method="post" th:action="@{/create}" th:object="${thing}">
+    <button type="submit" name="save">Зберегти</button>
+    <button type="submit" name="addThing" >Add</button>
+    <table>
+        <tr>
+            <td>
+                <table>
+                    <tr>
+                        <td>Назва</td>
+                        <td>
+                            <input type="text" th:field="*{name}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Тип</td>
+                        <td>
+                            <select th:field="*{type}" onChange="onstatechange(this)" class="infobox">
+                                <option th:each="type : ${allTypes}" th:value="${type.id}" th:text="${type.type}"></option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Категорія</td>
+                        <td>
+                            <select th:field="*{category}">
+                                <option th:value="'1'" th:text="1"></option>
+                                <option th:value="'2'" th:text="2"></option>
+                                <option th:value="'3'" th:text="3"></option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Стан</td>
+                        <td>
+                            <select th:field="*{state}"  onChange="onstatechange(this)" class="infobox">
+                                <option th:each="state : ${allStates}" th:value="${state.id}" th:text="${state.state}"></option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ціна(грн)</td>
+                        <td>
+                            <input type="text" th:field="*{price}">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>Характеристика</td>
+                    </tr>
+                    <tr>
+                        <td>Інформація</td>
+                        <td>
+                            <input type="text" th:field="*{properties.info}">
+                        </td>
+                    </tr>
+                    <tr >
+                        <td>Вага</td>
+                        <td>
+                            <input type="text" th:field="*{properties.weight}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Довжина</td>
+                        <td>
+                            <input type="text" th:field="*{properties.length}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Частота</td>
+                        <td>
+                            <input type="text" th:field="*{properties.frequency}">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <table>
+        <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th>
+                <button type="submit" name="addThing" >Add</button>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:fragment="things" th:each="thing,rowStat : ${thing.things}">
+            <td>
+                <table>
+                    <tr>
+                        <td>Назва</td>
+                        <td>
+                            <input type="hidden" th:field="${thing.things[__${rowStat.index}__].id}">
+                            <input  th:field="${thing.things[__${rowStat.index}__].name}" th:errorclass="is-invalid"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Тип</td>
+                        <td>
+                            <select th:field="${thing.things[__${rowStat.index}__].type}" id="type" onChange="onstatechange(this)" class="infobox">
+                                <option th:each="type : ${allTypes}" th:value="${type.id}" th:text="${type.type}"></option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Категорія</td>
+                        <td>
+                            <select th:field="${thing.things[__${rowStat.index}__].category}">
+                                <option th:value="'1'" th:text="1"></option>
+                                <option th:value="'2'" th:text="2"></option>
+                                <option th:value="'3'" th:text="3"></option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Стан</td>
+                        <td>
+                            <select th:field="${thing.things[__${rowStat.index}__].state}" id="state" onChange="onstatechange(this)" class="infobox">
+                                <option th:each="state : ${allStates}" th:value="${state.id}" th:text="${state.state}"></option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ціна</td>
+                        <td>
+                            <input  th:field="${thing.things[__${rowStat.index}__].price}" th:errorclass="is-invalid"/>
+                        </td>
+                    </tr>
+                    <tr><br/></tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>Характеристика</td>
+                    </tr>
+                    <tr>
+                        <td>Інформація</td>
+                        <td>
+                            <input th:field="${thing.things[__${rowStat.index}__].properties.info}" th:errorclass="is-invalid">
+                        </td>
+                    </tr>
+                    <tr >
+                        <td>Вага</td>
+                        <td>
+                            <input th:field="${thing.things[__${rowStat.index}__].properties.weight}" th:errorclass="is-invalid">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Довжина</td>
+                        <td>
+                            <input th:field="${thing.things[__${rowStat.index}__].properties.length}" th:errorclass="is-invalid">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Частота</td>
+                        <td>
+                            <input th:field="${thing.things[__${rowStat.index}__].properties.frequency}" th:errorclass="is-invalid">
+                        </td>
+                    </tr>
+                    <tr><br/></tr>
+                </table>
+            </td>
+            <td>
+                <div class="btn-group">
+                    <button type="submit" name="removeThing" th:value="${rowStat.index}" >Del</button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+</body>
+</html>

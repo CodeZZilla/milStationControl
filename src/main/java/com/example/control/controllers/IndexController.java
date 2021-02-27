@@ -23,9 +23,6 @@ import java.util.List;
 public class IndexController {
 
     private final ThingService thingService;
-    private final StateService stateService;
-    private final PropertiesService propertiesService;
-    private final TypeService typeService;
 
 
     @GetMapping("/")

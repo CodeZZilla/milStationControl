@@ -29,11 +29,10 @@ public class EditController {
         mav.addObject("thing", thing);
         mav.addObject("states", stateService.findAll());
         mav.addObject("types", typeService.findAll());
-//        mav.addObject("properties",thing.getProperties());
         return mav;
     }
 
-    @PostMapping("/save-edit")
+    @PostMapping("/save")
     public String editSave(@ModelAttribute("thing") Thing thing,
                            @AuthenticationPrincipal User user) {
 
