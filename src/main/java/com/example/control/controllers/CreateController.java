@@ -1,16 +1,20 @@
 package com.example.control.controllers;
 
-import com.example.control.models.*;
+import com.example.control.models.State;
+import com.example.control.models.Thing;
+import com.example.control.models.Type;
+import com.example.control.models.User;
 import com.example.control.services.StateService;
 import com.example.control.services.ThingService;
 import com.example.control.services.TypeService;
-import com.example.control.services.UnitService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -22,7 +26,6 @@ public class CreateController {
     private final StateService stateService;
     private final TypeService typeService;
     private final ThingService thingService;
-
 
 
     //Test
@@ -54,12 +57,12 @@ public class CreateController {
         }
 
         thing.setUnit(user.getUnit());
-        thing.getThings().stream().forEach(x -> {
+        thing.getThings().forEach(x -> {
             x.setUnit(user.getUnit());
             x.setParentThing(thing);
             thingService.save(x);
         });
-        thing.getThings().stream().forEach(System.out::println);
+        thing.getThings().forEach(System.out::println);
         thingService.save(thing);
         return "redirect:/";
     }

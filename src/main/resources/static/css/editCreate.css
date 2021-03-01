@@ -1,4 +1,4 @@
-input[type=text], select {
+input[type=text], input, select {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -18,3 +18,12 @@ button {
     border-radius: 4px;
     cursor: pointer;
 }
+
+.tableRight{
+    margin-left: 20px /* Расстояние между ячейками */
+}
+
+#formCreate table{
+    margin: auto;
+}
+

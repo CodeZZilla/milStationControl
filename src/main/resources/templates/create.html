@@ -2,14 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="editCreate.css">
+    <title>Створити</title>
+    <link rel="stylesheet" th:href="@{/css/editCreate.css}" >
 </head>
 <body>
-<form action="#" method="post" th:action="@{/create}" th:object="${thing}">
-    <button type="submit" name="save">Зберегти</button>
-    <button type="submit" name="addThing" >Add</button>
+
+
+<form id="formCreate" action="#" method="post" th:action="@{/create}" th:object="${thing}">
     <table>
+        <thead>
+        <td>
+            <button type="submit" name="save">Зберегти</button>
+        </td>
+        <td>
+            <button type="submit" name="addThing">Додати</button>
+        </td>
+        </thead>
         <tr>
             <td>
                 <table>
@@ -23,7 +31,8 @@
                         <td>Тип</td>
                         <td>
                             <select th:field="*{type}" onChange="onstatechange(this)" class="infobox">
-                                <option th:each="type : ${allTypes}" th:value="${type.id}" th:text="${type.type}"></option>
+                                <option th:each="type : ${allTypes}" th:value="${type.id}"
+                                        th:text="${type.type}"></option>
                             </select>
                         </td>
                     </tr>
@@ -40,8 +49,9 @@
                     <tr>
                         <td>Стан</td>
                         <td>
-                            <select th:field="*{state}"  onChange="onstatechange(this)" class="infobox">
-                                <option th:each="state : ${allStates}" th:value="${state.id}" th:text="${state.state}"></option>
+                            <select th:field="*{state}" onChange="onstatechange(this)" class="infobox">
+                                <option th:each="state : ${allStates}" th:value="${state.id}"
+                                        th:text="${state.state}"></option>
                             </select>
                         </td>
                     </tr>
@@ -54,7 +64,7 @@
                 </table>
             </td>
             <td>
-                <table>
+                <table class="tableRight">
                     <tr>
                         <td>Характеристика</td>
                     </tr>
@@ -64,7 +74,7 @@
                             <input type="text" th:field="*{properties.info}">
                         </td>
                     </tr>
-                    <tr >
+                    <tr>
                         <td>Вага</td>
                         <td>
                             <input type="text" th:field="*{properties.weight}">
@@ -86,17 +96,8 @@
             </td>
         </tr>
     </table>
-
+    <br>
     <table>
-        <thead>
-        <tr>
-            <th></th>
-            <th></th>
-            <th>
-                <button type="submit" name="addThing" >Add</button>
-            </th>
-        </tr>
-        </thead>
         <tbody>
         <tr th:fragment="things" th:each="thing,rowStat : ${thing.things}">
             <td>
@@ -105,14 +106,16 @@
                         <td>Назва</td>
                         <td>
                             <input type="hidden" th:field="${thing.things[__${rowStat.index}__].id}">
-                            <input  th:field="${thing.things[__${rowStat.index}__].name}" th:errorclass="is-invalid"/>
+                            <input th:field="${thing.things[__${rowStat.index}__].name}" th:errorclass="is-invalid"/>
                         </td>
                     </tr>
                     <tr>
                         <td>Тип</td>
                         <td>
-                            <select th:field="${thing.things[__${rowStat.index}__].type}" id="type" onChange="onstatechange(this)" class="infobox">
-                                <option th:each="type : ${allTypes}" th:value="${type.id}" th:text="${type.type}"></option>
+                            <select th:field="${thing.things[__${rowStat.index}__].type}" id="type"
+                                    onChange="onstatechange(this)" class="infobox">
+                                <option th:each="type : ${allTypes}" th:value="${type.id}"
+                                        th:text="${type.type}"></option>
                             </select>
                         </td>
                     </tr>
@@ -129,47 +132,53 @@
                     <tr>
                         <td>Стан</td>
                         <td>
-                            <select th:field="${thing.things[__${rowStat.index}__].state}" id="state" onChange="onstatechange(this)" class="infobox">
-                                <option th:each="state : ${allStates}" th:value="${state.id}" th:text="${state.state}"></option>
+                            <select th:field="${thing.things[__${rowStat.index}__].state}" id="state"
+                                    onChange="onstatechange(this)" class="infobox">
+                                <option th:each="state : ${allStates}" th:value="${state.id}"
+                                        th:text="${state.state}"></option>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <td>Ціна</td>
                         <td>
-                            <input  th:field="${thing.things[__${rowStat.index}__].price}" th:errorclass="is-invalid"/>
+                            <input th:field="${thing.things[__${rowStat.index}__].price}" th:errorclass="is-invalid"/>
                         </td>
                     </tr>
                     <tr><br/></tr>
                 </table>
             </td>
             <td>
-                <table>
+                <table class="tableRight">
                     <tr>
                         <td>Характеристика</td>
                     </tr>
                     <tr>
                         <td>Інформація</td>
                         <td>
-                            <input th:field="${thing.things[__${rowStat.index}__].properties.info}" th:errorclass="is-invalid">
+                            <input th:field="${thing.things[__${rowStat.index}__].properties.info}"
+                                   th:errorclass="is-invalid">
                         </td>
                     </tr>
-                    <tr >
+                    <tr>
                         <td>Вага</td>
                         <td>
-                            <input th:field="${thing.things[__${rowStat.index}__].properties.weight}" th:errorclass="is-invalid">
+                            <input th:field="${thing.things[__${rowStat.index}__].properties.weight}"
+                                   th:errorclass="is-invalid">
                         </td>
                     </tr>
                     <tr>
                         <td>Довжина</td>
                         <td>
-                            <input th:field="${thing.things[__${rowStat.index}__].properties.length}" th:errorclass="is-invalid">
+                            <input th:field="${thing.things[__${rowStat.index}__].properties.length}"
+                                   th:errorclass="is-invalid">
                         </td>
                     </tr>
                     <tr>
                         <td>Частота</td>
                         <td>
-                            <input th:field="${thing.things[__${rowStat.index}__].properties.frequency}" th:errorclass="is-invalid">
+                            <input th:field="${thing.things[__${rowStat.index}__].properties.frequency}"
+                                   th:errorclass="is-invalid">
                         </td>
                     </tr>
                     <tr><br/></tr>
@@ -177,7 +186,7 @@
             </td>
             <td>
                 <div class="btn-group">
-                    <button type="submit" name="removeThing" th:value="${rowStat.index}" >Del</button>
+                    <button type="submit" name="removeThing" th:value="${rowStat.index}">Del</button>
                 </div>
             </td>
         </tr>
